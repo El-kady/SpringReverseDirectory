@@ -28,6 +28,18 @@ public class UserController {
         return persons;
     }
 
+    @GetMapping(value="/users/number/{number}")
+    Page<User> listByNumber(@PathVariable String number,Pageable pageable){
+        Page<User> persons = userService.listAllByNumber(number,pageable);
+        return persons;
+    }
+
+    @GetMapping(value="/users/name/{name}")
+    Page<User> listByName(@PathVariable String name,Pageable pageable){
+        Page<User> persons = userService.listAllByName(name,pageable);
+        return persons;
+    }
+
     @PostMapping(value="/create")
     void create(@Valid @RequestBody User user){
         userService.save(user);
