@@ -1,6 +1,8 @@
 package App.services;
 
+import App.entities.Contact;
 import App.entities.User;
+import App.repositories.ContactRepository;
 import App.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,11 +18,21 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    ContactRepository contactRepository;
+
     public Page<User> listAllByPage(Pageable pageable){
         return userRepository.findAll(pageable);
     }
 
-    public User save(User user){
-        return userRepository.save(user);
+    public void save(User newuser){
+        User user = userRepository.findByPhoneNumber(newuser.getPhoneNumber());
+        if (user == null) {
+            userRepository.save(newuser);
+        }else{
+            newuser.getPhoneBook().forEach(newcontact -> {
+
+            });
+        }
     }
 }

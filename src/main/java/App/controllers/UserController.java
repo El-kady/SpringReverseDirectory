@@ -30,7 +30,7 @@ public class UserController {
 
     @PostMapping(value="/create")
     void create(@Valid @RequestBody User user){
-        User savedUser = userService.save(user);
+        userService.save(user);
 //        URI location = ServletUriComponentsBuilder
 //                .fromCurrentRequest()
 //                .path("/{id}")
